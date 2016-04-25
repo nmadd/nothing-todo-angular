@@ -23,7 +23,6 @@ router.route('/')
 router.route('/:id')
     .get((req, res, next) => {
         Todo.find({user: req.params.id})
-            .sort('-date')
             .then(todos => {
                 res.json(todos);
             })
