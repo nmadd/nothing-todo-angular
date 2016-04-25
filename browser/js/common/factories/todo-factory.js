@@ -33,6 +33,14 @@ app.factory('TodosFactory', ($http, AuthService) => {
         .then(response => response.data)
     };
 
+    factory.completeTodo = (todo) => {
+    	var todo_id = todo._id;
+    	$http({
+    		method: 'PUT',
+    		url: `/api/todos/${todo_id}`
+    	})
+    };
+
 
     return factory;
 });

@@ -5,7 +5,7 @@ module.exports = router;
 
 router.route('/')
     .get((req, res, next) => {
-        Todo.find({})
+        Todo.find({completed: false})
             // .sort('-date_created')
             .then(todos => {
                 res.json(todos);
@@ -22,9 +22,18 @@ router.route('/')
 
 router.route('/:id')
     .get((req, res, next) => {
-        Todo.find({user: req.params.id})
+        Todo.find({user: req.params.id, completed: false})
             .then(todos => {
                 res.json(todos);
             })
             .then(null, next);
+    })
+    .put((req, res, next) => {
+        Todo.update({_id: req.params.id}, {
+            completed: true
+        })
+        .then(todo => {
+            res.status(201).json(todo);
+        })
+        .then(null, next);
     })
