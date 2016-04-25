@@ -22,6 +22,7 @@ var Promise = require('bluebird');
 var chalk = require('chalk');
 var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
+var Todos = Promise.promisifyAll(mongoose.model('Todo'));
 
 var seedUsers = function () {
 
@@ -40,10 +41,29 @@ var seedUsers = function () {
 
 };
 
+var seedTodos = function () {
+
+    var today = new Date();
+
+    var todos = [
+        {
+            text: 'Do nothing',
+            date_created: today
+        },
+        {
+            text: 'Sit around and continue to do nothing',
+            date_created: today
+        }
+    ];
+
+    return Todos.createAsync(todos);
+
+};
+
 connectToDb.then(function () {
-    User.findAsync({}).then(function (users) {
-        if (users.length === 0) {
-            return seedUsers();
+    Todos.findAsync({}).then(function (todos) {
+        if (todos.length === 0) {
+            return seedTodos();
         } else {
             console.log(chalk.magenta('Seems to already be user data, exiting!'));
             process.kill(0);
