@@ -7,6 +7,7 @@ app.controller('HomeController', ($scope, theTodos, TodosFactory)=> {
 		TodosFactory.createTodo(todoText)
 		.then(todo => {
 			todos.push(todo);
+			$scope.todoText = '';
 		})
 	};
 	$scope.completeTodo = (completedTodo) => {

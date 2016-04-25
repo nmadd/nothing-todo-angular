@@ -4,7 +4,14 @@
 		<input type="text" ng-model="todoText">
 		<button type="submit">Submit</button>
 	</form>
-	<ul>
-		<li ng-repeat="todo in getTodos()"><button ng-click="completeTodo(todo)">NO</button>{{todo.text}}</li>
+	<ul dnd-list="getTodos()">
+		<li 
+		ng-repeat="todo in getTodos() track by $index" 
+		dnd-draggable="todo"
+		dnd-moved="getTodos().splice($index, 1)"
+		dnd-effect-allowed="move"
+		>
+		<button ng-click="completeTodo(todo)">NO</button>{{todo.text}}
+		</li>
 	</ul>
 </section>
