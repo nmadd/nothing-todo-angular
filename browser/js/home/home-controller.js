@@ -1,5 +1,6 @@
 app.controller('HomeController', ($scope, theTodos, TodosFactory)=> {
 	var todos = theTodos;
+	$scope.now = moment();
 	$scope.getTodos = ()=> {
 		return todos;
 	};

@@ -20,13 +20,16 @@ app.factory('TodosFactory', ($http, AuthService) => {
         .then(response => {
             var user_id = response._id;
             var today = new Date();
+            var now = moment(today);
+            var expiry = moment(today).add(5,'m');
 	        return $http({
 	            method: 'POST',
 	            url: 'api/todos/',
 	            data: {
 	                text: todoText,
-	                date_created: today,
-	                user: user_id
+	                date_created: now,
+	                user: user_id,
+	                expiration_date: expiry
 	            }
 	        })
         })

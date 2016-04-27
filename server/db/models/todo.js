@@ -13,6 +13,9 @@ var schema = new mongoose.Schema({
     date_created: {
         type: Date
     },
+    expiration_date: {
+        type: Date
+    },
     completed: {
         type: Boolean,
         default: false

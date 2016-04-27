@@ -2,7 +2,7 @@
 	<form name="addTodo" ng-submit="createTodo(todoText)">
 		<label for="addTodo">Add a todo:</label>
 		<input type="text" ng-model="todoText">
-		<button type="submit">Submit</button>
+		<button type="submit" >Submit</button>
 	</form>
 	<ul dnd-list="getTodos()">
 		<li 
@@ -11,7 +11,7 @@
 		dnd-moved="getTodos().splice($index, 1)"
 		dnd-effect-allowed="move"
 		>
-		<button ng-click="completeTodo(todo)">NO</button>{{todo.text}}
+		<button ng-click="completeTodo(todo)" class="btn-circle"></button>{{todo.text}}
 		</li>
 	</ul>
 </section>
