@@ -6,12 +6,12 @@
 		<input type="number" ng-model="dissNum">
 		<button type="submit" >Submit</button>
 	</form>
-	<ul dnd-list="getTodos()">
+	<ul dnd-list="todos">
 		<li 
-		ng-repeat="todo in getTodos() track by $index" 
+		ng-repeat="todo in todos track by $index" 
 		dnd-draggable="todo"
-		dnd-moved="getTodos().splice($index, 1)"
-		dnd-effect-allowed="move"
+		dnd-moved="moveIt()"
+		dnd-dragstart="copyIt(todo)"
 		>
 		<table>
 			<tr>
