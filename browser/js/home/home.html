@@ -1,7 +1,9 @@
 <section id="home">
-	<form name="addTodo" ng-submit="createTodo(todoText)">
+	<form name="addTodo" ng-submit="createTodo(todoText, dissNum)">
 		<label for="addTodo">Add a todo:</label>
 		<input type="text" ng-model="todoText">
+		<label for="addTodo">Dissapears in:</label>
+		<input type="number" ng-model="dissNum">
 		<button type="submit" >Submit</button>
 	</form>
 	<ul dnd-list="getTodos()">
@@ -11,7 +13,14 @@
 		dnd-moved="getTodos().splice($index, 1)"
 		dnd-effect-allowed="move"
 		>
-		<button ng-click="completeTodo(todo)" class="btn-circle"></button>{{todo.text}}
+		<table>
+			<tr>
+				<td><button ng-click="completeTodo(todo)" class="btn-circle"></button></td>
+				<td><p>{{todo.text}}</p></td>
+				<td><p>{{todo.expiration_date | date: format: timezone}}</p></td>
+				<td><span class="glyphicon glyphicon-pencil"></span></td>
+			</tr>
+		</table>	
 		</li>
 	</ul>
 </section>

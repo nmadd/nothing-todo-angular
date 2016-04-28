@@ -4,11 +4,12 @@ app.controller('HomeController', ($scope, theTodos, TodosFactory)=> {
 	$scope.getTodos = ()=> {
 		return todos;
 	};
-	$scope.createTodo = (todoText)=> {
-		TodosFactory.createTodo(todoText)
+	$scope.createTodo = (todoText, dissNum)=> {
+		TodosFactory.createTodo(todoText, dissNum)
 		.then(todo => {
 			todos.push(todo);
 			$scope.todoText = '';
+			$scope.dissNum = '';
 		})
 	};
 	$scope.completeTodo = (completedTodo) => {

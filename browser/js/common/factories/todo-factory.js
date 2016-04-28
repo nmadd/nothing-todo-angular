@@ -15,13 +15,13 @@ app.factory('TodosFactory', ($http, AuthService) => {
         .then(response => response.data)  
     };
 
-    factory.createTodo = (todoText) => {
+    factory.createTodo = (todoText, dissapearsIn) => {
         return AuthService.getLoggedInUser()
         .then(response => {
             var user_id = response._id;
             var today = new Date();
             var now = moment(today);
-            var expiry = moment(today).add(5,'m');
+            var expiry = moment(today).add(dissapearsIn,'m');
 	        return $http({
 	            method: 'POST',
 	            url: 'api/todos/',
