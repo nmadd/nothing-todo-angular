@@ -1,0 +1,16 @@
+<li  dnd-draggable="todo" dnd-moved="moveIt()" dnd-dragstart="copyIt(todo)">
+    <table>
+        <tr>
+            <td>
+                <button ng-click="completeTodo(todo)" class="btn-circle"></button>
+            </td>
+            <td>
+                <p>{{todo.text}}</p>
+            </td>
+            <td>
+                <p>{{todo.expiration_date | date: format: timezone}}</p>
+            </td>
+            <td><span class="glyphicon glyphicon-pencil"></span></td>
+        </tr>
+    </table>
+</li>
