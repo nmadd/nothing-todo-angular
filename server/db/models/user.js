@@ -24,6 +24,10 @@ var schema = new mongoose.Schema({
     },
     google: {
         id: String
+    },
+    default_expiration: {
+        type: Number,
+        default: 3
     }
 });
 
