@@ -1,14 +1,20 @@
 <section id="home">
-	<form name="addTodo" ng-submit="createTodo(todoText, dissNum)">
+	<form name="addTodo" ng-submit="createTodo(todoText, dissNum, dissTime)">
 		<label for="addTodo">Add a todo:</label>
 		<input type="text" ng-model="todoText">
 		<label for="addTodo">Dissapears in:</label>
 		<input type="number" ng-model="dissNum">
+		<select name="time" ng-model="dissTime">
+			<option value="">Select</option>
+			<option value="minutes">Minutes</option>
+			<option value="hours">Hours</option>
+			<option value="days">Days</option>
+		</select>
 		<button type="submit" >Submit</button>
 	</form>
 	<ul dnd-list="todos">
 	<!-- UNFINISHED TODO DIRECTIVE -->
-	<!-- todo ng-repeat="todo in todos track by $index" todo="todo"></todo> -->
+<!-- 	<todo ng-repeat="todo in todos track by $index" todo="todo" todos="todos"></todo> -->
 		<li 
 		ng-repeat="todo in todos track by $index" 
 		dnd-draggable="todo"
@@ -16,11 +22,27 @@
 		dnd-dragstart="copyIt(todo)"
 		>
 		<table>
-			<tr>
+			<tr ng-if="!isEditable(todo._id)">
 				<td><button ng-click="completeTodo(todo)" class="btn-circle"></button></td>
 				<td><p>{{todo.text}}</p></td>
 				<td><p>{{todo.expiration_date | date: format: timezone}}</p></td>
-				<td><span class="glyphicon glyphicon-pencil"></span></td>
+				<td><span ng-click="makeEditable(todo._id)" class="glyphicon glyphicon-pencil"></span></td>
+			</tr>
+			<tr ng-if="isEditable(todo._id)">
+				<form ng-submit="updateTodo(todo)">
+					<td><button ng-click="updateTodo(todo)" class="btn-circle"></button></td>
+					<td><input type="text" ng-model="todo.text"></td>
+					<td><input type="number" ng-model="todo.updated_expiration_date"></td>
+					<td>
+					<select name="time" ng-model="dissTime">
+						<option value="">Select</option>
+						<option value="minutes">Minutes</option>
+						<option value="hours">Hours</option>
+						<option value="days">Days</option>
+					</select>
+					</td>
+					<td><button type="submit" >Done</button></td>
+				</form>
 			</tr>
 		</table>	
 		</li>

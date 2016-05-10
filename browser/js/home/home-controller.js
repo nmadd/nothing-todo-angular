@@ -10,15 +10,25 @@ app.controller('HomeController', ($scope, theTodos, TodosFactory)=> {
 	$scope.copyIt = (indx) => {
 		selectedTodo = indx;
 	}
-	// $scope.getTodos = ()=> {
-	// 	return todos;
-	// };
-	$scope.createTodo = (todoText, dissNum)=> {
-		TodosFactory.createTodo(todoText, dissNum)
+	
+	var currentlyEditable = {};
+	$scope.isEditable = (id) => {
+		return currentlyEditable[id];
+	}
+
+	$scope.makeEditable = (id) => {
+		console.log('editable id', id);
+		currentlyEditable[id] = true;
+		console.log('currently editable', currentlyEditable);
+	};
+
+	$scope.createTodo = (todoText, dissNum, dissTime)=> {
+		TodosFactory.createTodo(todoText, dissNum, dissTime)
 		.then(todo => {
 			$scope.todos.push(todo);
 			$scope.todoText = '';
 			$scope.dissNum = '';
+
 		})
 	};
 	$scope.completeTodo = (completedTodo) => {
